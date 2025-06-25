@@ -43,8 +43,14 @@ git merge login-feature   # login-feature 브랜치의 내용을 main에 합치�
 ## ✅ 정리 요약
 명령어	설명
 ---
-`git branch`	브랜치 목록 확인
-`git branch new-feature`	새로운 브랜치 생성
-`git checkout new-feature`	브랜치로 이동
-`git checkout -b new-feature`	만들고 바로 이동
-`git merge` 브랜치명	다른 브랜치의 변경 사항을 현재 브랜치에 합침
+```bash
+git branch	#브랜치 목록 확인
+
+git branch new-feature	#새로운 브랜치 생성
+
+git checkout new-feature #브랜치로 이동
+
+git checkout -b new-feature	#만들고 바로 이동
+
+git merge #브랜치명	다른 브랜치의 변경 사항을 현재 브랜치에 합침
+```
