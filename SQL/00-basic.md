@@ -200,6 +200,4 @@ DROP DATABASE IF EXISTS database_name;
 * **PRIMARY KEY + AUTO\_INCREMENT**는 자주 쓰이는 기본 패턴
 * **DEFAULT + CURRENT\_TIMESTAMP**로 자동 시간 입력 가능
 
-```
-
 ---
