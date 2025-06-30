@@ -1,3 +1,0 @@
-select version();
-
--- ctrl + Enter
