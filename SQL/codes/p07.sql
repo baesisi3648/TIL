@@ -10,7 +10,7 @@ SELECT
     IFNULL(nickname, '미설정') AS 닉네임,
     IFNULL(CONCAT(YEAR(birth),'년생'), '알수없음') AS 출생년도,
     IFNULL(TIMESTAMPDIFF(YEAR, birth, CURDATE()), '알수없음') AS 나이,
-    ROUND(IFNULL(score, 0) , 1) AS 점수,
+    COALESCE(ROUND(score, 1), 0) AS 점수, -- IF(score IS NOT NULL, ROUND(score, 1) , 0) AS 점수,
     CASE
 		WHEN score >= 90 THEN 'A'
         WHEN score >= 80 THEN 'B'
