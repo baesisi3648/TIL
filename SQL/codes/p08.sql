@@ -59,3 +59,7 @@ WHERE customer_id IN (
 )
 AND order_date BETWEEN '2024-07-01' AND '2024-12-31'
 ORDER BY customer_id, order_date;
+
+USE practice;
+
+SELECT * FROM sales;

@@ -38,3 +38,37 @@ FROM customers c
 LEFT JOIN sales s ON c.customer_id = s.customer_id
 GROUP BY c.customer_id, c.customer_name, c.customer_type, c.join_date
 ORDER BY 총구매액 DESC;
+
+
+-- INNER JOIN 교집합
+-- 특정 고객의 ~~( 고객이 주어니까 고객데이터 중심으로 JOIN)
+SELECT
+	'1. INNER JOIN' AS 구분,
+    COUNT(*) AS 줄수,
+	COUNT(DISTINCT c.customer_id) AS 고객수
+FROM customers c 
+INNER JOIN sales s ON c. customer_id = s. customer_id
+
+UNION
+-- LEFT JOIN 왼쪽(FROM 뒤에 온)테이블은 무조건 다 나옴
+SELECT 
+	'2. LEFT JOIN' AS 구분,
+     COUNT(*) AS 줄수,
+	 COUNT(DISTINCT c.customer_id) AS 고객수
+FROM customers c 
+LEFT JOIN sales s ON c. customer_id = s. customer_id
+
+UNION
+SELECT 
+	'3. RIGHT JOIN' AS 구분,
+     COUNT(*) AS 줄수,
+	 COUNT(DISTINCT c.customer_id) AS 고객수
+FROM customers c 
+RIGHT JOIN sales s ON c. customer_id = s. customer_id -- RIGHT JOIN은 FROM 순서만 바꾸면 되는거라 실무에선 잘 사용안함. 
+
+UNION
+SELECT 
+	'3. 전체 고객수' AS 구분,
+     COUNT(*) AS 행수, -- 컬럼 이름 달라도 넣을 수 있음
+	 COUNT(*) AS 고객수
+FROM customers c;
