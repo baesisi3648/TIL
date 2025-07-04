@@ -43,6 +43,7 @@ SELECT * FROM sales;
 SELECT * FROM customers;
 -- View 2: 카테고리별 성과 요약 View (category_performance)
 -- 카테고리 별로, 총 주문건수, 총매출액, 평균주문금액, 구매고객수, 판매상품수, 매출비중(전체매출에서 해당 카테고리가 차지하는비율)
+DROP VIEW category_perfomance;
 CREATE VIEW category_perfomance AS
 SELECT 
 	category,
@@ -50,25 +51,29 @@ SELECT
     SUM(total_amount) AS 총매출액,
     AVG(total_amount) AS 평균주문금액,
     COUNT(DISTINCT customer_id) AS 구매고객수,
-    SUM(quantity) AS 판매상품수,
-    ROUND(SUM(total_amount) / (SELECT SUM(total_amount) FROM sales) * 100, 1) AS 매출비중
+    COUNT(DISTINCT product_name) AS 판매상품수,
+    ROUND(SUM(total_amount) / (SELECT SUM(total_amount) FROM sales) * 100, 2) AS 매출비중
 FROM sales
 GROUP BY category;
 
 
 -- View 3: 월별 매출 요약 (monthly_sales )
 -- 년월(24-07), 월주문건수, 월평균매출액, 월활성고객수, 월신규고객수
+
+DROP VIEW monthly_sales;
 CREATE VIEW monthly_sales AS
 SELECT 
   DATE_FORMAT(s.order_date, '%y-%m') AS 년월,
   COUNT(*) AS 월주문건수,
+  ROUND(SUM(s.total_amount)) AS 월매출액,
   ROUND(AVG(s.total_amount)) AS 월평균매출액,
   COUNT(DISTINCT s.customer_id) AS 월활성고객수,
-  COUNT(DISTINCT CASE 
-      WHEN DATE_FORMAT(c.join_date, '%y-%m') = DATE_FORMAT(s.order_date, '%y-%m')
-      THEN c.customer_id END
-  ) AS 월신규고객수
+  COUNT(DISTINCT c.customer_id) AS 월신규고객수
 FROM sales s
-JOIN customers c ON s.customer_id = c.customer_id
+LEFT JOIN customers c 
+	ON s.customer_id = c.customer_id
+	AND DATE_FORMAT(s.order_date, '%y-%m') = DATE_FORMAT(c.join_date, '%y-%m')
 GROUP BY DATE_FORMAT(s.order_date, '%y-%m')
 ORDER BY 년월;
+
+SELECT * FROM monthly_sales;
