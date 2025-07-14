@@ -6,7 +6,7 @@ SELECT
 	e.employee_id,
 	e.first_name,
 	e.last_name,
-	COUNT(c.support_rep_id) AS 담당고객수
+	COUNT(c.customer_id) AS 담당고객수
 FROM employees e
 LEFT JOIN customers c ON c.support_rep_id = e.employee_id
 GROUP BY e.employee_id, e.first_name, e.last_name

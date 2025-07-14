@@ -3,7 +3,7 @@
 
 SELECT
 	country,
-	COUNT(country) AS 고객수
+	COUNT(*) AS 고객수
 FROM customers
 GROUP BY country
 ORDER BY 고객수 DESC;
