@@ -40,3 +40,10 @@ htmlcov/
 .cache/
 *.sqlite3
 *.db
+.langgraph_api
+
+SQLP.pdf
+spri.pdf
+heristone.pdf
+db(2p).pdf
+DBIS.pdf
