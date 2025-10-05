@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- ========== META TAGS & FAVICON ========== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배성우 - AI Engineer & Data Scientist Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <style>
+        /* ========== RESET & BASE STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== UTILITY CLASSES ========== */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .nav-logo a {
+            text-decoration: none;
+            color: #667eea;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #667eea;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #a0a7ff;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #d0d7ff;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #1a1a2e;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #e0e7ff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ========== FLOATING PARTICLES ========== */
+        .particle {
+            position: absolute;
+            background: #667eea;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { 
+            width: 8px; 
+            height: 8px; 
+            top: 20%; 
+            left: 10%; 
+            animation-delay: 0s; 
+        }
+        
+        .particle:nth-child(2) { 
+            width: 12px; 
+            height: 12px; 
+            top: 60%; 
+            left: 80%; 
+            animation-delay: 2s; 
+        }
+        
+        .particle:nth-child(3) { 
+            width: 6px; 
+            height: 6px; 
+            top: 80%; 
+            left: 20%; 
+            animation-delay: 4s; 
+        }
+
+        /* ========== SECTION STYLES ========== */
+        .section {
+            padding: 100px 0;
+            position: relative;
+            background: #0a0a0a;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text {
+            padding: 2rem;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-card {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        /* ========== SKILLS SECTION ========== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 28px;
+        }
+
+        .skill-card h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: #b0b0b0;
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        .skill-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.8rem;
+        }
+
+        /* ========== TOOLS SECTION ========== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tool-category {
+            padding: 1.5rem;
+        }
+
+        .tool-category h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .tool-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tool-list li {
+            padding: 0.3rem 0;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        /* ========== PROJECTS SECTION ========== */
+        .projects-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #e91e63, #f57c00);
+            border-color: #e91e63;
+            color: white;
+        }
+
+        .tab-btn:hover:not(.active) {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            padding: 2rem;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-link {
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.5);
+        }
+
+        .project-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ========== LEARNING SECTION ========== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .blog-date {
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .blog-excerpt {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .collapsible-section {
+            margin: 3rem 0;
+        }
+
+        /* ========== JOURNEY SECTION ========== */
+        .journey-timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+
+        .journey-item {
+            position: relative;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .journey-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .journey-content {
+            width: 45%;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .journey-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        .journey-date {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .journey-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact {
+            background: linear-gradient(135deg, #1a1f35 0%, #0a0f1c 100%);
+        }
+
+        .contact-content {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ========== MODAL STYLES ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            min-width: 400px;
+            max-width: 500px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #b0b0b0;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #667eea;
+        }
+
+        .modal-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .modal-btn-primary {
+            background: #ffffff;
+            color: #1a1a2e;
+        }
+
+        .modal-btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .platform-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .platform-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .platform-list li:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .platform-list a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .platform-list a:hover {
+            color: #764ba2;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg); 
+            }
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(26, 26, 46, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                backdrop-filter: blur(10px);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .journey-timeline::before {
+                left: 20px;
+            }
+            
+            .journey-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+                padding-left: 50px;
+            }
+            
+            .journey-content {
+                width: 100%;
+            }
+            
+            .journey-icon {
+                left: 20px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .modal-content {
+                min-width: 90%;
+                max-width: 90%;
+                margin: 0 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#hero">BAESISI</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#learning">Learning</a></li>
+                <li><a href="#journey">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== FLOATING PARTICLES ========== -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>SEONGU BAE</h1>
+                <p class="subtitle"><span class="highlight">AI Engineer</span> & Data Scientist</p>
+                <p>
+                    스타트업부터 창업에 이르기까지 다양한 도메인 지식과 경험을 가지고 있고<br>
+                    논리적인 사고로 문제를 정의하는 Data Scientist가 되고자 합니다.<br>
+                    한 가지에 집중하여 책임감 있게 일하며, 배움과 성장을 좋아합니다.<br>
+                </p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+                    <button class="btn btn-secondary" onclick="showContactModal()">연락하기</button>
+                    <button class="btn btn-secondary" onclick="showResumeModal()">포트폴리오 보기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text glass">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">경험에서 인사이트를, 인사이트를 AI로</h3>
+                    <p style="margin-bottom: 1.5rem;">
+                        데이터 분석과 AI 기술을 학습하는데 집중하고 있습니다. 또한 다양한 경험을 통해 얻은 
+                        새로운 인사이트를 실전 프로젝트로 구현해내며 실력을 쌓아가고 있습니다.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin-top: 1.5rem;">
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea;">🔹</span>
+                            매일 github TIL 업데이트
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea;">🔹</span>
+                            다양한 코딩테스트 문제 해결
+                        </li>
+                        <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #667eea;">🔹</span>
+                            실전 프로젝트 경험 쌓기
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">개발 철학</h4>
+                        <p style="color: #b0b0b0; font-size: 0.95rem;">
+                            "관찰에서 문제를 뽑고, 데이터로 결정합니다.
+                            작게 만들어 시험하고 기록으로 더 낫게 만듭니다.
+                            혼자가 아닌 함께 꾸준히, 팀의 속도를 높입니다."
+                        </p>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="profile-card glass">
+                        <div class="profile-avatar">BAESISI</div>
+                        <h3 style="color: #667eea; margin-bottom: 0.5rem;">SEONGU BAE</h3>
+                        <p style="color: #b0b0b0; margin-bottom: 1rem;">AI Engineer & Data Scientist</p>
+                        <div style="margin: 2rem 0;">
+                            <div style="margin-bottom: 0.5rem; font-size: 0.9rem;">
+                                <span style="color: #667eea;">언어:</span> 
+                                <span style="color: #d0d0d0;">한국어(Native), 영어(TOEIC SPEAKING IH)</span>
+                            </div>
+                            <div style="font-size: 0.9rem;">
+                                <span style="color: #667eea;">선호 협업:</span> 
+                                <span style="color: #d0d0d0;">Git, Slack, Notion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SKILLS SECTION ========== -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card glass">
+                    <div class="skill-icon">🐍</div>
+                    <h3>Python & 데이터 처리</h3>
+                    <ul class="skill-list">
+                        <li>Numpy, Pandas</li>
+                        <li>데이터 수집, 정제, 처리</li>
+                        <li>기초 통계 및 데이터 분석</li>
+                        <li>EDA(데이터 파이프라인 구축)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card glass">
+                    <div class="skill-icon">🤖</div>
+                    <h3>머신러닝 & 모델링</h3>
+                    <ul class="skill-list">
+                        <li>머신러닝 알고리즘 학습</li>
+                        <li>모델링 이해</li>
+                        <li>비지도 학습 기초</li>
+                        <li>모델 평가 및 개선</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card glass">
+                    <div class="skill-icon">🧠</div>
+                    <h3>LLM & GPT 활용</h3>
+                    <ul class="skill-list">
+                        <li>GPT 트레이닝</li>
+                        <li>OpenAI API 활용</li>
+                        <li>LangChain 프레임워크</li>
+                        <li>LLM Agent 설계</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card glass">
+                    <div class="skill-icon">📈</div>
+                    <h3>비즈니스 분석 & 전략</h3>
+                    <ul class="skill-list">
+                        <li>고객행동 분석 & 데이터 마케팅</li>
+                        <li>비즈니스 인사이트 도출</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card glass">
+                    <div class="skill-icon">📊</div>
+                    <h3>데이터 시각화</h3>
+                    <ul class="skill-list">
+                        <li>Matplotlib, Seaborn</li>
+                        <li>차트 및 그래프 생성</li>
+                        <li>시각화 인사이트 발견</li>
+                        <li>Tableau 학습</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card glass">
+                    <div class="skill-icon">🔀</div>
+                    <h3>협업툴 & 프로젝트</h3>
+                    <ul class="skill-list">
+                        <li>Git workflow (branch, merge)</li>
+                        <li>GitHub 프로젝트 관리</li>
+                        <li>코드 리뷰 및 협업</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card glass">
+                    <div class="skill-icon">🏆</div>
+                    <h3>알고리즘 & 코딩테스트</h3>
+                    <ul class="skill-list">
+                        <li>3개 플랫폼에서 활발히 활동</li>
+                        <li>다양한 난이도 문제 해결</li>
+                        <li>꾸준한 학습 습관</li>
+                        <li>논리적 사고력 강화</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                         <button class="btn btn-secondary" onclick="showPlatformsModal()">플랫폼 보기</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 작업 환경 & 도구 -->
+            <div style="margin-top: 4rem;">
+                <h3 style="text-align: center; color: #667eea; margin-bottom: 2rem;">작업 환경 & 도구</h3>
+                <div class="tools-grid">
+                    <div class="tool-category glass">
+                        <h4>개발 환경</h4>
+                        <ul class="tool-list">
+                            <li>VS Code</li>
+                            <li>Python 3.13</li>
+                            <li>Windows</li>
+                        </ul>
+                    </div>
+                    <div class="tool-category glass">
+                        <h4>데이터 & 시각화</h4>
+                        <ul class="tool-list">
+                            <li>Pandas, NumPy</li>
+                            <li>Matplotlib, Seaborn</li>
+                            <li>Scikit-learn</li>
+                            <li>Requests, API 활용</li>
+                        </ul>
+                    </div>
+                    <div class="tool-category glass">
+                        <h4>데이터베이스</h4>
+                        <ul class="tool-list">
+                            <li>PostgreSQL, MySQL</li>
+                            <li>Google Spreadsheet</li>
+                        </ul>
+                    </div>
+                    <div class="tool-category glass">
+                        <h4>협업 도구</h4>
+                        <ul class="tool-list">
+                            <li>Git, GitHub</li>
+                            <li>Slack, Notion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROJECTS SECTION ========== -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            
+            <!-- 프로젝트 필터 탭 -->
+            <div class="projects-tabs">
+                <button class="tab-btn active" onclick="showProjects('all')">전체</button>
+                <button class="tab-btn" onclick="showProjects('data')">데이터 분석</button>
+                <button class="tab-btn" onclick="showProjects('ml')">머신러닝</button>
+                <button class="tab-btn" onclick="showProjects('sql')">SQL</button>
+            </div>
+
+            <!-- 프로젝트 그리드 -->
+            <div class="projects-grid" id="projects-container">
+                <div class="project-card glass" data-category="data">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">브라질 이커머스 데이터분석 프로젝트</h3>
+                            <p style="color: #b0b0b0; font-size: 0.9rem;">Olist 이커머스 고객 행동 및 비즈니스 인사이트 분석</p>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Numpy</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Data Analysis</span>
+                    </div>
+                    <p style="color: #d0d0d0; font-size: 0.9rem; line-height: 1.5;">
+                        브라질 최대 이커머스 플랫폼인 Olist의 고객 주문 데이터를 분석하여 고객 행동 패턴과 비즈니스 성과 지표를 도출했습니다. 
+                        지역별 매출 분석, 배송 시간 최적화, 고객 만족도 향상 방안을 제시했습니다.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/baesisi3648/" class="project-link" target="_blank">GitHub</a>
+                        <a href="#" class="project-link">Report</a>
+                    </div>
+                </div>
+
+                <div class="project-card glass" data-category="sql">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">SQL 데이터베이스 분석 프로젝트</h3>
+                            <p style="color: #b0b0b0; font-size: 0.9rem;">음악 데이터베이스를 활용한 다각적 SQL 분석</p>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Data Analysis</span>
+                        <span class="tech-tag">Database Design</span>
+                    </div>
+                    <p style="color: #d0d0d0; font-size: 0.9rem; line-height: 1.5;">
+                        음악 스트리밍 데이터베이스를 대상으로 하/중/상 난이도별 SQL 쿼리를 작성하고 분석했습니다. 
+                        매출 분석, 국가별 고객 매출 및 장르별 판매현황 등 실무에서 활용할 수 있는 다양한 분석을 수행했습니다.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/baesisi3648/" class="project-link" target="_blank">GitHub</a>
+                        <a href="#" class="project-link">Report</a>
+                    </div>
+                </div>
+
+                <div class="project-card glass" data-category="data">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">고객 획득비용(CAC) & 생애가치(LTV) 분석</h3>
+                            <p style="color: #b0b0b0; font-size: 0.9rem;">핀테크 지표 분석을 통한 마케팅 ROI 최적화</p>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Business Analytics</span>
+                        <span class="tech-tag">Cohort Analysis</span>
+                    </div>
+                    <p style="color: #d0d0d0; font-size: 0.9rem; line-height: 1.5;">
+                        개별성 고객 획득 비용과 생애 가치를 분석했습니다. 마케팅 효율성을 극대화하고 
+                        고객의 생애가치를 최대화하는 전략을 제시했습니다.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/baesisi3648/" class="project-link" target="_blank">GitHub</a>
+                        <a href="#" class="project-link">Report</a>
+                    </div>
+                </div>
+
+                <div class="project-card glass" data-category="ml">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Titanic 생존 요인 분석</h3>
+                            <p style="color: #b0b0b0; font-size: 0.9rem;">승객 생존 요인 분석</p>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Data Preprocessing</span>
+                        <span class="tech-tag">EDA</span>
+                    </div>
+                    <p style="color: #d0d0d0; font-size: 0.9rem; line-height: 1.5;">
+                        타이타닉 승객 데이터를 활용하여 이상값 처리와 모델링 과정을 통해 
+                        성별, 나이, 선실 등급 등 생존에 영향을 미치는 요소를 분석했습니다.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/baesisi3648/" class="project-link" target="_blank">GitHub</a>
+                        <a href="#" class="project-link">Notebook</a>
+                    </div>
+                </div>
+
+                <div class="project-card glass" data-category="ml">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">보험 약관 분석 LLM 에이전트</h3>
+                            <p style="color: #b0b0b0; font-size: 0.9rem;">RAG 기반 개인 맞춤형 보험 상품 평가 시스템</p>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">RAG</span>
+                        <span class="tech-tag">OpenAI API</span>
+                    </div>
+                    <p style="color: #d0d0d0; font-size: 0.9rem; line-height: 1.5;">
+                        복잡한 보험 약관을 자동으로 분석하고 개인의 상황에 맞는 최적의 보험 상품을 추천하는 AI 에이전트를 개발했습니다. 
+                        RAG(Retrieval-Augmented Generation) 기술을 활용하여 정확하고 신뢰성 있는 보험 상담 서비스를 구현했습니다.
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/baesisi3648/" class="project-link" target="_blank">GitHub</a>
+                        <a href="#" class="project-link">Analysis</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== LEARNING SECTION ========== -->
+    <section id="learning" class="section">
+        <div class="container">
+            <h2 class="section-title">Learning & Growth</h2>
+            
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <p style="color: #b0b0b0;">지속적인 학습과 AI 활용을 통해 성장하고 있습니다</p>
+            </div>
+
+            <!-- 관심 기술 트렌드 -->
+            <div style="margin-bottom: 4rem;">
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="color: #667eea; margin-bottom: 1.5rem; text-align: center;">관심 있는 기술 트렌드</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                        <span class="tech-tag" style="font-size: 1rem; padding: 0.8rem 1.5rem;">LLM Agent</span>
+                        <span class="tech-tag" style="font-size: 1rem; padding: 0.8rem 1.5rem;">LLM Fine-tuning</span>
+                        <span class="tech-tag" style="font-size: 1rem; padding: 0.8rem 1.5rem;">Sovereign AI</span>
+                        <span class="tech-tag" style="font-size: 1rem; padding: 0.8rem 1.5rem;">Multi Modal LLM</span>
+                    </div>
+                </div>
+
+                <!-- GitHub 활동 -->
+                <div class="glass" style="padding: 2rem;">
+                    <h4 style="color: #667eea; margin-bottom: 1rem; text-align: center;">GitHub 활동</h4>
+                    <p style="color: #b0b0b0; margin-bottom: 2rem; text-align: center;">꾸준한 코딩과 프로젝트 진행 상황</p>
+                    <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #667eea;">100+</div>
+                            <div style="font-size: 0.9rem; color: #b0b0b0;">총 커밋</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #667eea;">5</div>
+                            <div style="font-size: 0.9rem; color: #b0b0b0;">공개 저장소</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #667eea;">40+</div>
+                            <div style="font-size: 0.9rem; color: #b0b0b0;">TIL 포스트</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <a href="https://github.com/baesisi3648" target="_blank" style="color: #667eea; text-decoration: none;">
+                            GitHub에서 더 보기 →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 학습 노트 & TIL 버튼 -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <div class="glass" style="padding: 2rem; text-align: center;">
+                    <h4 style="color: #667eea; margin-bottom: 1rem;">학습 노트</h4>
+                    <p style="color: #d0d0d0; margin-bottom: 1.5rem;">체계적으로 정리된 개념들</p>
+                    <button class="btn btn-secondary" onclick="toggleSection('notes-section')" style="padding: 10px 25px;">
+                        노트 보기
+                    </button>
+                </div>
+                <div class="glass" style="padding: 2rem; text-align: center;">
+                    <h4 style="color: #667eea; margin-bottom: 1rem;">TIL 기록</h4>
+                    <p style="color: #d0d0d0; margin-bottom: 1.5rem;">매일의 학습 기록</p>
+                    <button class="btn btn-secondary" onclick="toggleSection('til-section')" style="padding: 10px 25px;">
+                        TIL 보기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 학습 노트 섹션 (접힘) -->
+            <div id="notes-section" class="collapsible-section" style="display: none;">
+                <h3 style="color: #667eea; margin-bottom: 2rem; text-align: center;">학습 노트 모음</h3>
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <a href="https://www.notion.so/21cee8fffe15809b8428e059252b7b63?v=21cee8fffe158139b40e000c1a50ab22&source=copy_link" 
+                       target="_blank" 
+                       class="btn btn-primary" 
+                       style="padding: 12px 30px;">
+                        전체 학습 노트 보기
+                    </a>
+                </div>
+                <div class="blog-grid">
+                    <div class="blog-card glass">
+                        <div class="blog-date">August, 2025</div>
+                        <h4 class="blog-title">Machine Learning</h4>
+                        <p class="blog-excerpt">
+                            머신러닝 기본 개념과 알고리즘들을 학습했습니다. 
+                            지도학습과 비지도학습, 주요 알고리즘의 특징과 활용법을 체계적으로 학습했습니다.
+                        </p>
+                        <div style="margin-top: 1rem;">
+                            <span class="tech-tag" style="font-size: 0.8rem;">Data Analysis</span>
+                            <span class="tech-tag" style="font-size: 0.8rem;">EDA</span>
+                        </div>
+                    </div>
+                    <div class="blog-card glass">
+                        <div class="blog-date">August, 2025</div>
+                        <h4 class="blog-title">NumPy & Pandas</h4>
+                        <p class="blog-excerpt">
+                            Python 데이터 처리의 핵심 라이브러리인 NumPy와 Pandas를 학습했습니다. 
+                            배열 연산부터 데이터프레임 조작까지 실습 위주로 학습했습니다.
+                        </p>
+                        <div style="margin-top: 1rem;">
+                            <span class="tech-tag" style="font-size: 0.8rem;">NumPy</span>
+                            <span class="tech-tag" style="font-size: 0.8rem;">Pandas</span>
+                        </div>
+                    </div>
+                    <div class="blog-card glass">
+                        <div class="blog-date">July, 2025</div>
+                        <h4 class="blog-title">Python 기초</h4>
+                        <p class="blog-excerpt">
+                            Python 프로그래밍 기초 문법과 핵심 개념들을 체계적으로 학습했습니다. 
+                            변수, 함수, 제어문부터 객체지향 프로그래밍까지 단계별로 학습했습니다.
+                        </p>
+                        <div style="margin-top: 1rem;">
+                            <span class="tech-tag" style="font-size: 0.8rem;">Python</span>
+                            <span class="tech-tag" style="font-size: 0.8rem;">Programming</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIL 섹션 (접힘) -->
+            <div id="til-section" class="collapsible-section" style="display: none;">
+                <h3 style="color: #667eea; margin-bottom: 2rem; text-align: center;">최근 학습 기록 (TIL)</h3>
+                <div class="blog-grid">
+                    <div class="blog-card glass">
+                        <div class="blog-date">9월</div>
+                        <h4 class="blog-title">LLM 활용과 고급 기법</h4>
+                        <p class="blog-excerpt">
+                            LLM의 원리와 프롬프트 엔지니어링을 체계적으로 학습하고 있습니다. 
+                            고급 활용법을 실제 프로젝트에 연결하며 최종 프로젝트를 준비하고 있습니다.
+                        </p>
+                    </div>
+                    <div class="blog-card glass">
+                        <div class="blog-date">8월</div>
+                        <h4 class="blog-title">머신러닝과 프로젝트 실습</h4>
+                        <p class="blog-excerpt">
+                            머신러닝 알고리즘을 공부하며 데이터 분석 프로젝트를 수행했습니다. 
+                            실제 데이터를 다루고 모델을 적용해 실무 감각을 키웠습니다.
+                        </p>
+                    </div>
+                    <div class="blog-card glass">
+                        <div class="blog-date">7월</div>
+                        <h4 class="blog-title">Python과 데이터 수집</h4>
+                        <p class="blog-excerpt">
+                            Python 기초부터 NumPy, Pandas를 활용한 데이터 처리를 학습했습니다. 
+                            Data Scraping과 Web API 활용을 통해 실제 데이터 수집 경험을 쌓았습니다.
+                        </p>
+                    </div>
+                    <div class="blog-card glass">
+                        <div class="blog-date">6월</div>
+                        <h4 class="blog-title">기초 도구와 SQL</h4>
+                        <p class="blog-excerpt">
+                            Git 기초, SQL 학습으로 데이터에 대해 학습했습니다. 
+                            개발 환경 설정과 버전 관리, 데이터베이스 기초를 익혔습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 문제 해결 경험 -->
+            <div style="margin: 3rem 0;">
+                <h3 style="color: #667eea; margin-bottom: 2rem; text-align: center;">문제 해결 경험</h3>
+                <div class="blog-grid">
+                    <div class="blog-card glass">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">데이터 타입 불일치 해결</h4>
+                        <p style="color: #d0d0d0; font-size: 0.9rem; line-height: 1.5;">
+                            다중 소스 병합 전 스키마 프로파일링→표준 dtype 매핑을 정의하고, 
+                            astype/to_datetime/to_numeric 일괄 적용과 병합 전후 검증 테스트로 타입 오류·누락을 방지했습니다.
+                        </p>
+                    </div>
+                    <div class="blog-card glass">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">스캔/인코딩 문서 인식률 개선 (LLM 에이전트)</h4>
+                        <p style="color: #d0d0d0; font-size: 0.9rem; line-height: 1.5;">
+                            텍스트 추출 실패 시 ocr_pdf_with_pytesseract로 자동 폴백하는 전처리 단계(이미지 정규화→OCR→정제)를 추가해 
+                            스캔·깨진 인코딩 PDF도 안정적으로 인식되도록 했습니다.
+                        </p>
+                    </div>
+                    <div class="blog-card glass">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">대용량 문서 토큰 초과 오류 해소</h4>
+                        <p style="color: #d0d0d0; font-size: 0.9rem; line-height: 1.5;">
+                            임베딩/요약 단계에서 max_tokens_per_request 오류를 재현하고, 청크 길이·겹침 재설계와 
+                            요약 압축·메타데이터 프리필터로 요청 크기를 제어해 파이프라인을 안정화했습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== JOURNEY SECTION ========== -->
+    <section id="journey" class="section">
+        <div class="container">
+            <h2 class="section-title">My Journey</h2>
+            
+            <!-- 단기 & 장기 목표 -->
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">단기 & 장기 목표</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div class="glass" style="padding: 2rem;">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">단기 목표 (6개월)</h4>
+                        <ul style="list-style: none; padding: 0; color: #d0d0d0; text-align: left;">
+                            <li style="margin: 0.5rem 0; padding-left: 1rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #667eea;">📌</span>
+                                  첫 Data Scientist / AI Engineer 포지션 확보
+                            </li>
+                            <li style="margin: 0.5rem 0; padding-left: 1rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #667eea;">📌</span>
+                                  실무 프로젝트 3개 이상 완성
+                            </li>
+                            <li style="margin: 0.5rem 0; padding-left: 1rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #667eea;">📌</span>
+                                  ADSP, 빅데이터 분석기사 등 자격증 획득
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="glass" style="padding: 2rem;">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">장기 목표 (5년)</h4>
+                        <ul style="list-style: none; padding: 0; color: #d0d0d0; text-align: left;">
+                            <li style="margin: 0.5rem 0; padding-left: 1rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #667eea;">🎯</span>
+                                  시니어 Data Scientist / AI Engineer 레벨
+                            </li>
+                            <li style="margin: 0.5rem 0; padding-left: 1rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #667eea;">🎯</span>
+                                  AI 에이전트 개발 리드 경험
+                            </li>
+                            <li style="margin: 0.5rem 0; padding-left: 1rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #667eea;">🎯</span>
+                                  AI 관련 석사 입학 및 논문 게재
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 타임라인 -->
+            <div class="journey-timeline">
+                <div class="journey-item">
+                    <div class="journey-content glass">
+                        <div class="journey-date">2012 - 2019</div>
+                        <h3 class="journey-title">경희대학교 식품생명공학과 졸업</h3>
+                        <p>경희대학교 식품생명공학과 학업을 통해 과학적 사고의 기반을 다졌습니다.</p>
+                    </div>
+                    <div class="journey-icon">🎓</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content glass">
+                        <div class="journey-date">2019 - 2020</div>
+                        <h3 class="journey-title">학부 행정 업무</h3>
+                        <p>전반적인 학부 행정 업무를 진행하며, 학과 예산을 배정하고 관리했습니다.</p>
+                    </div>
+                    <div class="journey-icon">📝</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content glass">
+                        <div class="journey-date">2020 - 2021</div>
+                        <h3 class="journey-title">가맹사업 운영</h3>
+                        <p>'승도리네 곱도리탕' 프랜차이즈화 전환 사업에 총괄을 맡았으며, 스타트업의 발판을 마련했습니다.</p>
+                    </div>
+                    <div class="journey-icon">🏢</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content glass">
+                        <div class="journey-date">2022 - 2023</div>
+                        <h3 class="journey-title">브랜드 런칭 및 제품 마케팅</h3>
+                        <p>식물성 건강 스낵 브랜드 '파이토플레이크'를 런칭하고, 국내 3사 백화점 식품관 및 급식 경로에 B2B 납품했습니다. 해외로는 5개국에 수출하는 성과를 이뤘습니다.</p>
+                    </div>
+                    <div class="journey-icon">🌱</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content glass">
+                        <div class="journey-date">2021 - 2025</div>
+                        <h3 class="journey-title">매장 운영</h3>
+                        <p>매장 운영을 총괄하며, 고객 서비스 및 광고 데이터를 기반으로 한 매출 증대 전략을 세워 3년 연속 매출 증가 및 지역 맛집 1위를 달성했습니다.</p>
+                    </div>
+                    <div class="journey-icon">🍜</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content glass">
+                        <div class="journey-date">2025.05 - 현재</div>
+                        <h3 class="journey-title">데이터 사이언티스트로 성장 중</h3>
+                        <p>SeSAC에서 'AI기반 데이터 분석가 양성과정'을 수강하며 Python, SQL, 머신러닝, AI agent를 배우고 있습니다. 코딩 문제를 풀고, 실전 프로젝트를 진행하며 실력을 쌓아가고 있습니다.</p>
+                    </div>
+                    <div class="journey-icon">📊</div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-content glass">
+                        <div class="journey-date">목표</div>
+                        <h3 class="journey-title">데이터로 문제를 해결하는 전문가</h3>
+                        <p>지금까지의 다양한 경험을 바탕으로 비즈니스 문제를 데이터로 해결할 수 있는 전문가가 되고 싶습니다. 실무에서 바로 활용할 수 있는 인사이트를 만들어내는 것이 목표입니다.</p>
+                    </div>
+                    <div class="journey-icon">🎯</div>
+                </div>
+            </div>
+
+            <!-- 네트워킹 -->
+            <div style="margin-top: 4rem;">
+                <h3 style="color: #667eea; margin-bottom: 2rem; text-align: center;">네트워킹</h3>
+                <div class="blog-grid">
+                    <div class="blog-card glass">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">AI 관련 정보수집</h4>
+                        <p style="color: #d0d0d0; font-size: 0.9rem;">
+                            매일 새롭게 변화하는 AI관련 기사와 소식을 읽고, 관련된 정보로부터 인사이트를 만들어내고 있습니다.
+                        </p>
+                    </div>
+                    <div class="blog-card glass">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">코드 리뷰</h4>
+                        <p style="color: #d0d0d0; font-size: 0.9rem;">
+                            리뷰·피드백을 주고받으며 배움의 폭을 넓히고, 협업 네트워크를 쌓아가고 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION ========== -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Contact</h2>
+                <p style="color: #b0b0b0; margin-bottom: 2rem;">
+                    데이터 분석 프로젝트나 협업 기회에 대해 논의하고 싶으시다면 언제든 연락주세요!
+                </p>
+                <div class="contact-info">
+                    <a href="mailto:baesisi3648@gmail.com" class="contact-item" style="text-decoration: none; color: inherit;">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <div style="font-weight: 600;">Email</div>
+                            <div>baesisi3648@gmail.com</div>
+                        </div>
+                    </a>
+                    <a href="https://github.com/baesisi3648" target="_blank" class="contact-item" style="text-decoration: none; color: inherit;">
+                        <div class="contact-icon">👨‍💻</div>
+                        <div>
+                            <div style="font-weight: 600;">GitHub</div>
+                            <div>github.com/baesisi3648</div>
+                        </div>
+                    </a>
+                    <a href="https://www.notion.so/260576c82b6180b18e63e3f7c569a170" target="_blank" class="contact-item" style="text-decoration: none; color: inherit;">
+                        <div class="contact-icon">📋</div>
+                        <div>
+                            <div style="font-weight: 600;">Notion</div>
+                            <div>notion.so/portfolio</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div style="margin: 3rem 0;">
+                    <button class="btn btn-primary" onclick="showResumeModal()" style="font-size: 1.1rem; padding: 15px 40px;">
+                        포트폴리오 보기
+                    </button>
+                </div>
+
+                <p style="color: #667eea; margin-top: 2rem; font-size: 1.1rem;">
+                    "Thank you!"
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MODAL COMPONENTS ========== -->
+    <!-- 이력서 모달 -->
+    <div id="resumeModal" class="modal">
+        <div class="modal-content glass">
+            <span class="modal-close" onclick="closeResumeModal()">&times;</span>
+            <h3 class="modal-title">포트폴리오 확인하기</h3>
+            <p style="color: #b0b0b0; margin-bottom: 1rem;">
+                원하시는 방식으로 포트폴리오를 확인하세요
+            </p>
+            <div class="modal-buttons">
+                <a href="https://www.notion.so/260576c82b6180b18e63e3f7c569a170?source=copy_link" 
+                   target="_blank" 
+                   class="modal-btn modal-btn-primary"
+                   onclick="closeResumeModal()">
+                    포트폴리오 보기 📄
+                </a>
+                <button class="modal-btn modal-btn-secondary" onclick="downloadResume(); closeResumeModal();">
+                    PDF 다운로드 📥
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 연락하기 모달 -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content glass">
+            <span class="modal-close" onclick="closeContactModal()">&times;</span>
+            <h3 class="modal-title">연락하기</h3>
+            <p style="color: #b0b0b0; margin-bottom: 1rem;">
+                편한 방법으로 연락주세요
+            </p>
+            <div class="modal-buttons">
+                <a href="mailto:baesisi3648@gmail.com" 
+                   class="modal-btn modal-btn-primary"
+                   onclick="closeContactModal()">
+                    이메일 보내기 📧
+                </a>
+                <a href="https://www.notion.so/260576c82b6180b18e63e3f7c569a170?source=copy_link" 
+                   target="_blank" 
+                   class="modal-btn modal-btn-secondary"
+                   onclick="closeContactModal()">
+                    Notion 연결 💼
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 코딩테스트 플랫폼 모달 -->
+    <div id="platformsModal" class="modal">
+        <div class="modal-content glass">
+            <span class="modal-close" onclick="closePlatformsModal()">&times;</span>
+            <h3 class="modal-title">코딩테스트 플랫폼</h3>
+            <p style="color: #b0b0b0; margin-bottom: 1.5rem;">
+                다양한 플랫폼에서 실력을 쌓아가고 있습니다.
+            </p>
+            <ul class="platform-list">
+                <li>
+                    <a href="https://dailyalgo.kr/ko" target="_blank" onclick="closePlatformsModal()">
+                        <span>DailyAlgo</span>
+                        <span>&rarr;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://programmers.co.kr/users/challenge-activity" target="_blank" onclick="closePlatformsModal()">
+                        <span>Programmers</span>
+                        <span>&rarr;</span>
+                    </a>                    
+                </li>
+                <li>
+                    <a href="https://www.acmicpc.net/user/baesisi3648" target="_blank" onclick="closePlatformsModal()">
+                        <span>Baekjoon</span>
+                        <span>&rarr;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://leetcode.com/problem-list/vossyuq6/" target="_blank" onclick="closePlatformsModal()">
+                        <span>LeetCode</span>
+                        <span>&rarr;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.kaggle.com/baesisi" target="_blank" onclick="closePlatformsModal()">
+                        <span>Kaggle</span>
+                        <span>&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ========== NAVIGATION FUNCTIONALITY ==========
+        // 모바일 네비게이션 토글
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // 네비게이션 링크 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // 모바일 메뉴 닫기
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // 스크롤 시 네비게이션 배경 변경
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(26, 26, 46, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(26, 26, 46, 0.9)';
+            }
+        });
+
+        // ========== PROJECT FILTERING ==========
+        function showProjects(category) {
+            const projects = document.querySelectorAll('.project-card');
+            const tabs = document.querySelectorAll('.tab-btn');
+            
+            // 활성 탭 업데이트
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // 프로젝트 필터링
+            projects.forEach(project => {
+                if (category === 'all' || project.dataset.category === category) {
+                    project.style.display = 'block';
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        }
+
+        // ========== SECTION TOGGLE ==========
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const allSections = document.querySelectorAll('.collapsible-section');
+            
+            // 다른 섹션들은 닫기
+            allSections.forEach(sec => {
+                if (sec.id !== sectionId) {
+                    sec.style.display = 'none';
+                }
+            });
+            
+            // 선택한 섹션 토글
+            if (section.style.display === 'none' || section.style.display === '') {
+                section.style.display = 'block';
+                // 섹션이 열린 후 Learning 섹션의 제목 부분으로 스크롤
+                setTimeout(() => {
+                    const learningSection = document.getElementById('learning');
+                    const learningTop = learningSection.offsetTop + 150; // 제목 아래쪽으로
+                    window.scrollTo({
+                        top: learningTop,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        // ========== MODAL FUNCTIONS ==========
+        // 이력서 모달
+        function showResumeModal() {
+            document.getElementById('resumeModal').style.display = 'block';
+        }
+
+        function closeResumeModal() {
+            document.getElementById('resumeModal').style.display = 'none';
+        }
+
+        // 연락하기 모달
+        function showContactModal() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+
+        // 플랫폼 모달
+        function showPlatformsModal() {
+            document.getElementById('platformsModal').style.display = 'block';
+        }
+
+        function closePlatformsModal() {
+            document.getElementById('platformsModal').style.display = 'none';
+        }
+
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const resumeModal = document.getElementById('resumeModal');
+            const contactModal = document.getElementById('contactModal');
+            const platformsModal = document.getElementById('platformsModal');
+            
+            if (event.target == resumeModal) {
+                resumeModal.style.display = 'none';
+            }
+            if (event.target == contactModal) {
+                contactModal.style.display = 'none';
+            }
+            if (event.target == platformsModal) {
+                platformsModal.style.display = 'none';
+            }
+        }
+
+        // 이력서 다운로드 기능
+        function downloadResume() {
+            // 실제로는 PDF 파일 다운로드 링크를 제공
+            alert('이력서 다운로드 기능입니다. 실제 환경에서는 PDF 파일이 다운로드됩니다.');
+        }
+
+        // ========== SCROLL ANIMATIONS ==========
+        // 카드들에 대한 스크롤 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 스킬 카드 및 다른 요소들 관찰
+        document.querySelectorAll('.skill-card, .journey-item, .project-card, .blog-card, .tool-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // ========== FLOATING PARTICLES ANIMATION ==========
+        document.querySelectorAll('.particle').forEach((particle, index) => {
+            particle.style.animationDelay = `${index * 2}s`;
+        });
+
+        // ========== CONTACT ITEM HOVER EFFECTS ==========
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-2px) scale(1)';
+            });
+        });
+
+        // ========== PAGE INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Portfolio loaded successfully!');
+        });
+    </script>
+</body>
+</html>
